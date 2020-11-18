@@ -146,30 +146,30 @@ def course_detail(request, id):
         # 根据id删除课程信息
         elif request.method == 'DELETE':
             course.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
+            return Response(data={'msg': '课程删除成功'}, status=status.HTTP_204_NO_CONTENT)
 
 
-"""
-三、通用类视图
-"""
-
-
-class GCourseList(generics.ListCreateAPIView):
-    """
-    获取课程列表，内置方法
-    """
-    queryset = Course.objects.all()
-    serializer_class = CourseSerializer
-    permission_classes = (IsAuthenticated, )
-
-    def perform_create(self, serializer):
-        serializer.save(teacher=self.request.user)
-
-
-class GCourseDetail(generics.RetrieveUpdateDestroyAPIView):
-    """
-    更新课程列表，内置方法
-    """
-    queryset = Course.objects.all()
-    serializer_class = CourseSerializer
-    permission_classes = (IsAuthenticated, IsOwnerReadOnly)
+# """
+# 三、通用类视图
+# """
+#
+#
+# class GCourseList(generics.ListCreateAPIView):
+#     """
+#     获取课程列表，内置方法
+#     """
+#     queryset = Course.objects.all()
+#     serializer_class = CourseSerializer
+#     permission_classes = (IsAuthenticated, )
+#
+#     def perform_create(self, serializer):
+#         serializer.save(teacher=self.request.user)
+#
+#
+# class GCourseDetail(generics.RetrieveUpdateDestroyAPIView):
+#     """
+#     更新课程列表，内置方法
+#     """
+#     queryset = Course.objects.all()
+#     serializer_class = CourseSerializer
+#     permission_classes = (IsAuthenticated, IsOwnerReadOnly)
